@@ -1,11 +1,11 @@
 # iiitd-cgpa-calculator
 
-A simple website for calculating your CGPA at IIIT-Delhi considering all the involved nuances.
+A simple website for calculating your CGPA at IIIT-Delhi considering all the nuances involved with SG/CW, OC/TA credits, extra credits, etc.
 The rules for CGPA calculation are as per the [Academic Regulations (May 2024)](https://iiitd.ac.in/sites/default/files/docs/education/2024/2024-May-UG%20Regulations.pdf) for B.Tech students at IIIT-Delhi.
 
 ## How to use
 
-1. Go to the website [here](https://iiitd-cgpa-calculator.herokuapp.com/).
+1. Go to the website [here](https://zynade.github.io/iiitd-cgpa-calculator/).
 2. Enter your grades in the respective fields.
 3. Click on the "Calculate CGPA" button.
 4. Your CGPA will be displayed on the screen.
