@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGPA Calculator for IIIT-Delhi</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🎓 IIIT-Delhi CGPA Calculator</h1>
+            <p>Calculate your CGPA with ease!</p>
+        </header>
+        <form id="cgpa-form" class="form">
+            <div class="form-group">
+                <label for="regular-sems">Number of Regular Semesters:</label>
+                <input type="number" id="regular-sems" min="0" placeholder="Eg: 6" required>
+            </div>
+            <div class="form-group">
+                <label for="summer-sems">Number of Summer Semesters:</label>
+                <input type="number" id="summer-sems" min="0" placeholder="Eg: 2" required>
+            </div>
+            <div id="semesters-inputs"></div>
+            <div class="form-group">
+                <label for="oc-creds">Number of OC/TA Credits:</label>
+                <input type="number" id="oc-creds" min="0" placeholder="Eg: 4" required>
+            </div>
+            <div class="button-group">
+                <button type="button" class="button" onclick="addSemestersInputs()">Add Semester Details</button>
+                <button type="button" class="button primary" onclick="calculateCGPA()">Calculate CGPA</button>
+            </div>
+        </form>
+        <div id="worst-grades-inputs" class="hidden">
+            <h3>Enter Worst Grades</h3>
+            <div id="worst-grades-container"></div>
+            <button type="button" class="button primary" onclick="finalizeCGPA()">Finalize CGPA</button>
+        </div>
+        <div id="results" class="results hidden"></div>
+    </div>
+    <script src="scripts.js"></script>
+
+    <footer class="footer">
+        <p>&copy; 2024 Atharv Goel. All rights reserved.</p>
+        <p>For any suggestions, please contact: <a href="mailto:atharv21027@iiitd.ac.in">atharv21027@iiitd.ac.in</a></p>
+        <p>Check out <a href="https://github.com/Zynade/iiitd-cgpa-calculator" target="_blank">the GitHub repository.</a></p>
+        <p class="disclaimer">Disclaimer: This is an unofficial tool and bears no affiliation with <a href="https://iiitd.ac.in/" target="_blank"> IIIT Delhi. </a> </p>
+    </footer>
+    
+</body>
+</html>
