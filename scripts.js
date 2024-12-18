@@ -55,7 +55,7 @@ function calculateCGPA() {
     let gradedCredits = sgpas.reduce((sum, [_, creds]) => sum + creds, 0);
     let baseline = 0;
     if (regularSems > 5) {
-        baseline = regularSems === 6 ? 116 : regularSems === 7 ? 136 : 156;
+        baseline = regularSems === 6 ? 116 : regularSems === 7 ? 136 : 152;
     }
     let totalCredits = gradedCredits + ocCreds;
 
