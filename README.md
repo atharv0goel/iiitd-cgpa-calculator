@@ -10,8 +10,6 @@ The rules for CGPA calculation are as per the [Academic Regulations (May 2024)](
 3. Click on the "Calculate CGPA" button.
 4. Your CGPA will be displayed on the screen.
 
-The script `calculate_cgpa_cli.py` provides a command line interface for calculating CGPA as per the same logic.
-
 NOTE: This tool assumes you have passed all your courses. If you have failed a course, you need to manually adjust the credits and grade points for the semester in which you failed the course.
 
 ## Support

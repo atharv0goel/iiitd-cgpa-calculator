@@ -62,6 +62,10 @@ function calculateCGPA() {
     let N = Math.max(0, totalCredits - baseline);
     nRemoval = Math.min(8, N);
 
+    if (regularSems <= 5) {
+        nRemoval = 0;
+    }
+
     const worstGradesContainer = document.getElementById('worst-grades-container');
     worstGradesContainer.innerHTML = '';
 
