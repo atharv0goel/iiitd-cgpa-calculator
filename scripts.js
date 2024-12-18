@@ -113,13 +113,19 @@ function finalizeCGPA() {
     resultsDiv.innerHTML = `
         <h2><strong>CGPA:</strong> ${cgpa.toFixed(2)}</h2>
         <br>
-        <h2>More Information:</h3>
+        <h3>More Information:</h3>
         <p><strong>Total Credits (excluding SG/CW):</strong> ${sgpas.reduce((sum, [_, creds]) => sum + creds, 0) + ocCreds}</p>
-        <p><strong>Graded Credits:</strong> ${sgpas.reduce((sum, [_, creds]) => sum + creds, 0)}</p>
-        <p><strong>Baseline:</strong> ${baseline}</p>
-        <p><strong>Credits being removed:</strong> ${nRemoval}</p>
-        <p><strong>Extra credits beyond removal:</strong> ${nExtra}</p>
     `;
+
+    if (regularSems > 5) {
+        resultsDiv.innerHTML += `
+            <p><strong>Graded Credits:</strong> ${sgpas.reduce((sum, [_, creds]) => sum + creds, 0)}</p>
+            <p><strong>Baseline:</strong> ${baseline}</p>
+            <p><strong>Credits being removed:</strong> ${nRemoval}</p>
+            <p><strong>Extra credits beyond removal:</strong> ${nExtra}</p>
+
+        `;
+    }
 
     toggleVisibility('results', true);
     toggleVisibility('worst-grades-inputs', false);
