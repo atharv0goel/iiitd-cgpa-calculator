@@ -66,6 +66,15 @@ function calculateCGPA() {
         nRemoval = 0;
     }
 
+    const worstGradersSubtitle = document.getElementById('worst-grades-title');
+    worstGradersSubtitle.innerHTML = `
+      Enter Worst Grades
+        <br> 
+        <small> 
+          totalling ${nRemoval} credits. 
+        </small>
+    `;
+
     const worstGradesContainer = document.getElementById('worst-grades-container');
     worstGradesContainer.innerHTML = '';
 
