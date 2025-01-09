@@ -5,7 +5,7 @@ The rules for CGPA calculation are as per the [Academic Regulations (May 2024)](
 
 ## How to use
 
-1. Go to the website [here](https://zynade.github.io/iiitd-cgpa-calculator/).
+1. Go to the website [here](https://atharv0goel.github.io/iiitd-cgpa-calculator/).
 2. Enter your grades in the respective fields.
 3. Click on the "Calculate CGPA" button.
 4. Your CGPA will be displayed on the screen.
