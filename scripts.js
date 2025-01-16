@@ -13,30 +13,47 @@ function toggleVisibility(elementId, show = true) {
 }
 
 function addSemestersInputs() {
-  const regularSems = parseInt(document.getElementById('regular-sems').value) || 0;
-  const summerSems = parseInt(document.getElementById('summer-sems').value) || 0;
-  const totalSems = regularSems + summerSems;
+    const regularSems = parseInt(document.getElementById('regular-sems').value) || 0;
+    const summerSems = parseInt(document.getElementById('summer-sems').value) || 0;
+    const totalSems = regularSems + summerSems;
 
-  const container = document.getElementById('semesters-inputs');
-  container.innerHTML = '';
+    const container = document.getElementById('semesters-inputs');
+    container.innerHTML = '';  // Clear previous inputs
 
-  for (let i = 1; i <= totalSems; i++) {
-      const labelType = i <= regularSems ? `Semester ${i}` : `Summer Semester ${i - regularSems}`;
+    for (let i = 1; i <= totalSems; i++) {
+        const labelType = i <= regularSems ? `Semester ${i}` : `Summer Semester ${i - regularSems}`;
 
-      container.innerHTML += `
-          <div class="semester-row">
-              <div class="form-group">
-                  <label for="sgpa-sem-${i}">${labelType} SGPA:</label>
-                  <input type="number" id="sgpa-sem-${i}" min="0" max="10" step="0.01" placeholder="Eg: 9.0" required>
-              </div>
-              <div class="form-group">
-                  <label for="credits-sem-${i}"># Graded Credits:</label>
-                  <input type="number" id="credits-sem-${i}" min="0" placeholder="Eg: 20" required>
-              </div>
-          </div>
-      `;
-  }
+        container.innerHTML += `
+            <div class="semester-row">
+                <div class="form-group">
+                    <label for="sgpa-sem-${i}">${labelType} SGPA:</label>
+                    <input type="number" id="sgpa-sem-${i}" min="0" max="10" step="0.01" placeholder="Eg: 9.0" required 
+                        oninput="validateSGPA(this)">
+                </div>
+                <div class="form-group">
+                    <label for="credits-sem-${i}"># Graded Credits:</label>
+                    <input type="number" id="credits-sem-${i}" min="0" placeholder="Eg: 20" required 
+                        oninput="validateCredits(this)">
+                </div>
+            </div>
+        `;
+    }
 }
+
+function validateSGPA(input) {
+    if (input.value < 0) {
+        input.value = 0;
+    } else if (input.value > 10) {
+        input.value = 10;
+    }
+}
+
+function validateCredits(input) {
+    if (input.value < 0) {
+        input.value = 0;
+    }
+}
+
 
 
 function calculateCGPA() {
