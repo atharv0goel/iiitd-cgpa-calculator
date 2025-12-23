@@ -116,43 +116,64 @@ function calculateCGPA() {
 function finalizeCGPA() {
     const regularSems = parseInt(document.getElementById('regular-sems').value) || 0;
     const ocCreds = parseInt(document.getElementById('oc-creds').value) || 0;
-
+    const gradedCredits = sgpas.reduce((sum, [_, creds]) => sum + creds, 0);
     let numerator = sgpas.reduce((sum, [grade, creds]) => sum + grade * creds, 0);
-
+    let removedCredits = 0;
     for (let i = 0; i < Math.ceil(nRemoval / 4); i++) {
         const grade = parseFloat(document.getElementById(`worst-grade-${i}`).value) || 0;
         const credits = parseFloat(document.getElementById(`worst-credits-${i}`).value) || 0;
-        numerator -= grade * credits;
-    }
 
+        numerator -= grade * credits;
+        removedCredits += credits;
+    }
+    if (regularSems > 5 && removedCredits !== nRemoval) {
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = `
+            <h2 style="color:red;"><strong>Error:</strong> Removed credits must total exactly ${nRemoval}.</h2>
+            <p>You entered ${removedCredits} credits to remove.</p>
+        `;
+        toggleVisibility('results', true);
+        return;
+    }
     let baseline = 0;
     if (regularSems > 5) {
         baseline = regularSems === 6 ? 116 : regularSems === 7 ? 136 : 156;
     }
 
-    let nExtra = Math.max(0, sgpas.reduce((sum, [_, creds]) => sum + creds, 0) + ocCreds - baseline - nRemoval);
-    let denominator = baseline - ocCreds + nExtra;
+    let denominator = gradedCredits - removedCredits;
 
-    let cgpa = numerator / denominator;
+    const totalCreditsExcludingSGCW = gradedCredits + ocCreds;
+    const nExtra = Math.max(0, totalCreditsExcludingSGCW - baseline - nRemoval);
 
+    if (denominator <= 0) {
+        const resultsDiv = document.getElementById('results');
+        resultsDiv.innerHTML = `
+            <h2 style="color:red;"><strong>Error:</strong> Invalid denominator (${denominator}). Check credits.</h2>
+        `;
+        toggleVisibility('results', true);
+        return;
+    }
+    const cgpa = numerator / denominator;
     const resultsDiv = document.getElementById('results');
     resultsDiv.innerHTML = `
         <h2><strong>CGPA:</strong> ${cgpa.toFixed(2)}</h2>
         <br>
         <h3>More Information:</h3>
-        <p><strong>Total Credits (excluding SG/CW):</strong> ${sgpas.reduce((sum, [_, creds]) => sum + creds, 0) + ocCreds}</p>
+        <p><strong>Total Credits (excluding SG/CW):</strong> ${totalCreditsExcludingSGCW}</p>
     `;
 
     if (regularSems > 5) {
         resultsDiv.innerHTML += `
-            <p><strong>Graded Credits:</strong> ${sgpas.reduce((sum, [_, creds]) => sum + creds, 0)}</p>
+            <p><strong>Graded Credits:</strong> ${gradedCredits}</p>
             <p><strong>Baseline:</strong> ${baseline}</p>
             <p><strong>Credits being removed:</strong> ${nRemoval}</p>
+            <p><strong>Credits actually removed (from inputs):</strong> ${removedCredits}</p>
             <p><strong>Extra credits beyond removal:</strong> ${nExtra}</p>
-
+            <p><strong>Denominator used (graded - removed):</strong> ${denominator}</p>
         `;
     }
 
     toggleVisibility('results', true);
     toggleVisibility('worst-grades-inputs', false);
 }
+
